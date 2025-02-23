@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Self
+from typing import Any, Dict, Generator, List, Self
 import unittest
 import json
 
@@ -55,8 +55,12 @@ class DataStruct:
         with open(path) as file:
             return cls(yaml.load(file, yaml.Loader))
 
+    def items(self) -> Generator[tuple[str, Any], None, None]:
+        for name in self.__names:
+            yield name, self[name]
+
     def __hash__(self):
-        return hash(self.dict())
+        return hash(str(self))
 
 
 class DataStructTest(unittest.TestCase):
@@ -104,6 +108,9 @@ class DataStructTest(unittest.TestCase):
         self.assertTrue(DataStruct({'a': 1}) == DataStruct({'a': 1}))
         self.assertTrue(DataStruct({'a': 2}) != DataStruct({'a': 1}))
 
+    def test_hash(self):
+        self.assertNotEqual(hash(self.ds), hash(DataStruct({})))
+
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)
