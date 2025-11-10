@@ -1,5 +1,5 @@
 from typing import Any, Callable, Dict, Tuple, Iterable
-from threading import Thread as BaseThread, active_count
+from threading import Thread as BaseThread
 import uuid
 from unittest import main, TestCase
 from sys import stderr

@@ -1,7 +1,7 @@
 from logging import getLogger
 from unittest import main, TestCase
 
-from run import BaseRun, RunStatus
+from .run import BaseRun, RunStatus
 
 
 class RunExample(BaseRun):
